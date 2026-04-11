@@ -30,14 +30,12 @@
             padding: 20px;
         }
 
-        /* 简约容器 */
         .container {
             width: 100%;
             max-width: 500px;
             margin: 0 auto;
         }
 
-        /* 页面主标题 */
         .page-title {
             font-size: 32px;
             font-weight: 700;
@@ -54,7 +52,6 @@
             margin-bottom: 32px;
         }
 
-        /* iOS 风格卡片 */
         .card {
             background: #ffffff;
             border-radius: 20px;
@@ -63,7 +60,6 @@
             margin-bottom: 20px;
         }
 
-        /* 上传区域 */
         .upload-zone {
             background: #f9f9fb;
             border: 1.5px dashed #c6c6c8;
@@ -266,7 +262,7 @@
                 </div>
             </div>
             <div class="result-item">
-                <span class="label">⚡ 镜像加速链接（通过代理）</span>
+                <span class="label">⚡ 镜像加速链接（通过你的Worker）</span>
                 <div class="input-group">
                     <input type="text" id="proxyLink" readonly>
                     <button class="btn-copy" onclick="copyValue('proxyLink', this)">复制</button>
@@ -276,22 +272,21 @@
         </div>
     </div>
 
-    <!-- 你的推广链接（请替换为实际地址） -->
+    <!-- 推广链接 -->
     <div class="promo-link">
         📢 我的 Telegram 频道：<a href="https://t.me/+vaYeXvNp91NlOTNl" target="_blank" rel="noopener noreferrer">https://t.me/+vaYeXvNp91NlOTNl</a>
     </div>
     <div class="footer-note">
-        文件永久保存，镜像加速由第三方提供，请勿上传敏感内容
+        文件永久保存，镜像加速由你自己的Worker提供，请勿上传敏感内容
     </div>
 </div>
 
 <script>
     // ---------- 配置 ----------
-    const PROXY_GATEWAY = 'https://3.0o0o0.de5.net/?target=';  // 删除这行
+    // 已移除第三方代理 PROXY_GATEWAY
     const API_URL = 'https://catbox.moe/user/api.php';
-    const CF_PROXY = 'https://3.0o0o0.de5.net/?target=';      // 上传用的 CORS 代理
-
-    
+    // 请将下面的地址替换为你自己的 Worker 地址（必须保留 ?target=）
+    const CF_PROXY = 'https://3.0o0o0.de5.net.com/?target=';   // 例如 https://proxy.example.com/?target=
 
     // DOM 元素
     const fileInput = document.getElementById('fileInput');
@@ -370,7 +365,8 @@
                     let responseUrl = xhr.responseText.trim();
                     if (responseUrl && (responseUrl.startsWith('http://') || responseUrl.startsWith('https://'))) {
                         rawLinkInput.value = responseUrl;
-                        proxyLinkInput.value = buildMirrorWithProxy(responseUrl);
+                        // 使用自己的 Worker 生成镜像加速链接
+                        proxyLinkInput.value = CF_PROXY + encodeURIComponent(responseUrl);
                         progressSection.style.display = 'none';
                         resultSection.style.display = 'block';
                         resolve(responseUrl);
