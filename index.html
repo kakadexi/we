@@ -287,15 +287,11 @@
 
 <script>
     // ---------- 配置 ----------
-    const PROXY_GATEWAY = 'https://3.0o0o0.de5.net/?target=';  // 第三方镜像代理（可替换为你自己的）
+    const PROXY_GATEWAY = 'https://3.0o0o0.de5.net/?target=';  // 删除这行
     const API_URL = 'https://catbox.moe/user/api.php';
     const CF_PROXY = 'https://3.0o0o0.de5.net/?target=';      // 上传用的 CORS 代理
 
-    function buildMirrorWithProxy(originalUrl) {
-        if (!originalUrl) return '';
-        let cleanUrl = originalUrl.replace(/^https?:\/\//, '');
-        return PROXY_GATEWAY + cleanUrl;
-    }
+    
 
     // DOM 元素
     const fileInput = document.getElementById('fileInput');
