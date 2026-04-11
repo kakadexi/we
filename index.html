@@ -252,23 +252,15 @@
 
 <script>
     // ---------- 配置 ----------
-    // 配置区
-const API_URL = 'https://catbox.moe/user/api.php';
-const UPLOAD_PROXY = 'https://3.0o0o0.de5.net/?target=';   // 上传用的代理（支持 POST）
-const MIRROR_BASE = 'https://3.0o0o0.de5.net/';            // 镜像加速基础地址
+    const PROXY_GATEWAY = 'http://3.0o0o0.de5.net';  // 第三方镜像代理（可替换为你自己的）
+    const API_URL = 'https://catbox.moe/user/api.php';
+    const CF_PROXY = 'https://proxy.jsnzkpg.uk/?url=';      // 上传用的 CORS 代理
 
-// 上传成功后的处理
-xhr.onload = () => {
-  if (xhr.status === 200) {
-    let responseUrl = xhr.responseText.trim();
-    if (responseUrl && responseUrl.startsWith('http')) {
-      rawLinkInput.value = responseUrl;
-      // 生成镜像链接：基础地址 + 原始完整URL
-      proxyLinkInput.value = MIRROR_BASE + responseUrl;
-      // ...
+    function buildMirrorWithProxy(originalUrl) {
+        if (!originalUrl) return '';
+        let cleanUrl = originalUrl.replace(/^https?:\/\//, '');
+        return PROXY_GATEWAY + cleanUrl;
     }
-  }
-};
 
     // DOM 元素
     const fileInput = document.getElementById('fileInput');
