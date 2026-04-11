@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>卡卡的西直链托管 · 透明玻璃</title>
+    <title>卡卡的西永久直链托管</title>
     <script>
         var _hmt = _hmt || [];
         (function() {
@@ -21,130 +21,125 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
+        /* 极简磨砂背景 */
         body {
+            background-color: #f5f5f7;
             min-height: 100vh;
-            background: radial-gradient(circle at 20% 30%, rgba(96, 165, 255, 0.4), rgba(255, 215, 235, 0.3));
-            backdrop-filter: blur(20px);
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
 
-        /* 主容器 */
-        .glass-container {
+        .container {
             width: 100%;
-            max-width: 520px;
+            max-width: 500px;
             margin: 0 auto;
         }
 
-        /* 标题区域 - 透明磨砂 */
-        .title-section {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-
+        /* 标题文字保持深色 */
         .page-title {
-            font-size: 34px;
+            font-size: 32px;
             font-weight: 700;
-            background: rgba(255, 255, 255, 0.9);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            letter-spacing: -0.5px;
+            text-align: center;
+            margin-bottom: 8px;
+            color: #1c1c1e;
+            letter-spacing: -0.3px;
         }
 
         .subtitle {
-            font-size: 15px;
-            color: rgba(255, 255, 255, 0.85);
-            font-weight: 500;
-            margin-top: 6px;
-            backdrop-filter: blur(4px);
-        }
-
-        /* 玻璃卡片 */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(25px);
-            border-radius: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            padding: 28px 22px;
-            transition: all 0.3s ease;
-        }
-
-        /* 上传区域 */
-        .upload-zone {
-            background: rgba(255, 255, 255, 0.25);
-            border: 1.5px dashed rgba(255, 255, 255, 0.6);
-            border-radius: 28px;
-            padding: 36px 20px;
             text-align: center;
-            cursor: pointer;
-            transition: 0.25s;
+            font-size: 15px;
+            color: #8e8e93;
+            margin-bottom: 32px;
+        }
+
+        /* 卡片：无边框，半透磨砂，极简阴影 */
+        .card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02);
+            padding: 24px 20px;
             margin-bottom: 20px;
         }
 
+        /* 上传区域：浅灰底，无边框或极浅边框 */
+        .upload-zone {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            padding: 32px 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 16px;
+        }
+
         .upload-zone:hover {
-            background: rgba(255, 255, 255, 0.35);
-            border-color: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(0, 0, 0, 0.1);
         }
 
         .upload-icon {
-            font-size: 48px;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+            font-size: 44px;
+            margin-bottom: 12px;
         }
 
         .upload-title {
             font-weight: 600;
-            font-size: 18px;
-            color: white;
-            margin-top: 12px;
+            font-size: 17px;
+            color: #1c1c1e;
             margin-bottom: 6px;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
 
         .upload-info {
             font-size: 13px;
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.4;
+            color: #6c6c70;
+            line-height: 1.5;
         }
 
+        /* 按钮：纯白底 + 黑色文字 */
         .btn {
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            color: white;
+            background: #ffffff;
+            color: #1c1c1e;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            padding: 12px;
+            border-radius: 14px;
             font-weight: 600;
-            padding: 14px;
-            border-radius: 40px;
-            width: 100%;
             font-size: 17px;
+            width: 100%;
             cursor: pointer;
             transition: 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
         }
 
         .btn:active {
+            background: #f2f2f5;
             transform: scale(0.97);
-            background: rgba(255, 255, 255, 0.5);
         }
 
         .btn-outline {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            margin-top: 16px;
+            background: transparent;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            color: #007aff;
+            margin-top: 12px;
+        }
+
+        .btn-outline:active {
+            background: rgba(0, 122, 255, 0.05);
         }
 
         #progressSection, #resultSection {
             display: none;
-            margin-top: 24px;
+            margin-top: 20px;
         }
 
         .progress-bar {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.08);
             height: 6px;
-            border-radius: 10px;
+            border-radius: 3px;
             overflow: hidden;
             margin: 12px 0;
         }
@@ -152,109 +147,80 @@
         .progress-fill {
             width: 0%;
             height: 100%;
-            background: white;
-            border-radius: 10px;
+            background: #007aff;
             transition: width 0.3s;
         }
 
         .progress-text {
             font-size: 13px;
-            color: white;
+            color: #007aff;
             text-align: center;
-            font-weight: 500;
+            margin-top: 8px;
         }
 
         .result-item {
-            margin-bottom: 22px;
+            margin-bottom: 20px;
         }
 
         .label {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            color: white;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+            color: #1c1c1e;
+            margin-bottom: 6px;
+            display: block;
         }
 
         .input-group {
             display: flex;
-            background: rgba(255, 255, 255, 0.25);
-            border-radius: 28px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
             overflow: hidden;
-            backdrop-filter: blur(4px);
         }
 
         .input-group input {
             flex: 1;
             background: transparent;
             border: none;
-            padding: 14px 18px;
+            padding: 12px;
             font-size: 14px;
             outline: none;
-            color: white;
-            font-weight: 500;
-        }
-
-        .input-group input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
+            color: #1c1c1e;
         }
 
         .btn-copy {
-            background: rgba(255, 255, 255, 0.3);
+            background: transparent;
             border: none;
-            padding: 0 22px;
-            color: white;
+            padding: 0 16px;
+            color: #007aff;
             font-weight: 600;
             font-size: 15px;
             cursor: pointer;
-            backdrop-filter: blur(4px);
-            transition: 0.2s;
         }
 
         .btn-copy:active {
-            background: rgba(255, 255, 255, 0.6);
+            opacity: 0.6;
         }
 
         .error-message {
-            background: rgba(255, 80, 80, 0.8);
-            backdrop-filter: blur(10px);
-            color: white;
+            background: rgba(255, 235, 235, 0.9);
+            color: #ff3b30;
             font-size: 13px;
             padding: 12px;
-            border-radius: 24px;
-            margin-top: 16px;
+            border-radius: 12px;
+            margin-top: 12px;
             display: none;
             text-align: center;
-            font-weight: 500;
-        }
-
-        /* 装饰光晕 */
-        .glass-container::before {
-            content: '';
-            position: fixed;
-            top: -20%;
-            left: -20%;
-            width: 140%;
-            height: 140%;
-            background: radial-gradient(circle, rgba(255,255,240,0.2), transparent 70%);
-            pointer-events: none;
-            z-index: -1;
         }
     </style>
 </head>
 <body>
 
-<div class="glass-container">
-    <div class="title-section">
-        <div class="page-title">卡卡的西 · 直链托管</div>
-        <div class="subtitle">不限格式 · 200MB · 永久储存</div>
-    </div>
+<div class="container">
+    <div class="page-title">卡卡的西永久直链托管</div>
+    <div class="subtitle">不限格式 · 200MB内 · 永久储存</div>
 
-    <div class="glass-card">
+    <div class="card">
         <div id="uploadForm">
             <div class="upload-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
                 <div class="upload-icon">📂</div>
@@ -275,14 +241,14 @@
             <div class="result-item">
                 <span class="label">🔗 原始官方链接 (Catbox)</span>
                 <div class="input-group">
-                    <input type="text" id="rawLink" readonly placeholder="上传成功后将显示链接">
+                    <input type="text" id="rawLink" readonly>
                     <button class="btn-copy" onclick="copyValue('rawLink', this)">复制</button>
                 </div>
             </div>
             <div class="result-item">
                 <span class="label">⚡ 镜像加速链接</span>
                 <div class="input-group">
-                    <input type="text" id="proxyLink" readonly placeholder="通过代理加速访问">
+                    <input type="text" id="proxyLink" readonly>
                     <button class="btn-copy" onclick="copyValue('proxyLink', this)">复制</button>
                 </div>
             </div>
@@ -293,15 +259,14 @@
 
 <script>
     // ---------- 配置 ----------
-    // 注意：请替换为你自己的代理地址（支持 POST 的 Worker）
-    const PROXY_GATEWAY = 'http://3.0o0o0.de5.net/https:';   // 镜像代理（仅展示）
+    const PROXY_GATEWAY = 'http://3.0o0o0.de5.net/https://';  // 镜像代理（路径式）
     const API_URL = 'https://catbox.moe/user/api.php';
-    const CF_PROXY = 'https://proxy.jsnzkpg.uk/?url=';       // 上传用 CORS 代理
+    const CF_PROXY = 'https://proxy.jsnzkpg.uk/?url=';      // 上传用的 CORS 代理
 
     function buildMirrorWithProxy(originalUrl) {
         if (!originalUrl) return '';
-        let cleanUrl = originalUrl.replace(/^https?:\/\//, '');
-        return PROXY_GATEWAY + cleanUrl;
+        // 保留协议，直接拼接（因为 PROXY_GATEWAY 已包含 https://）
+        return PROXY_GATEWAY + originalUrl.replace(/^https?:\/\//, '');
     }
 
     // DOM 元素
@@ -427,16 +392,16 @@
         e.stopPropagation();
     }
     dropZone.addEventListener('dragenter', () => {
-        dropZone.style.background = 'rgba(255,255,255,0.4)';
-        dropZone.style.borderColor = 'rgba(255,255,255,0.9)';
+        dropZone.style.background = 'rgba(255, 255, 255, 0.95)';
+        dropZone.style.borderColor = 'rgba(0, 0, 0, 0.15)';
     });
     dropZone.addEventListener('dragleave', () => {
-        dropZone.style.background = 'rgba(255,255,255,0.25)';
-        dropZone.style.borderColor = 'rgba(255,255,255,0.6)';
+        dropZone.style.background = 'rgba(255, 255, 255, 0.8)';
+        dropZone.style.borderColor = 'rgba(0, 0, 0, 0.05)';
     });
     dropZone.addEventListener('drop', (e) => {
-        dropZone.style.background = 'rgba(255,255,255,0.25)';
-        dropZone.style.borderColor = 'rgba(255,255,255,0.6)';
+        dropZone.style.background = 'rgba(255, 255, 255, 0.8)';
+        dropZone.style.borderColor = 'rgba(0, 0, 0, 0.05)';
         const files = e.dataTransfer.files;
         if (files && files.length > 0) {
             fileInput.files = files;
