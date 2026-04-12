@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>裤佬永久直链托管</title>
+    <title>卡卡的西永久直链托管</title>
     <style>
         :root {
             --glass-bg: rgba(255, 255, 255, 0.15);
@@ -20,12 +20,10 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             color: var(--text-primary);
-            overflow: hidden;
             position: relative;
             padding: 15px;
-            padding-top: 8vh;
         }
 
         .background-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; }
@@ -37,57 +35,11 @@
             z-index: -1;
         }
 
-        .marquee-container {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 8px 0;
-            box-shadow: var(--glass-shadow);
-            overflow: hidden;
-            z-index: 100;
-        }
-        .marquee {
-            white-space: nowrap;
-            display: flex;
-            animation: marquee 15s linear infinite;
-        }
-        .marquee a {
-            color: var(--text-primary);
-            font-weight: bold;
-            text-decoration: none;
-            padding: 0 15px;
-            font-size: 14px;
-        }
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
-        .avatar-container {
-            text-align: center;
-            margin-bottom: 0;
-            line-height: 0;
-        }
-        .avatar-img {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: none;
-            background: transparent;
-            transition: transform 0.3s ease;
-            display: block;
-            margin: 0 auto;
-        }
-        .avatar-img:hover { transform: scale(1.05); }
-
         .page-title {
             text-align: center;
             font-size: 32px;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff);
             background-size: 400% 400%;
             -webkit-background-clip: text;
@@ -100,8 +52,8 @@
             100% { background-position: 0% 50%; }
         }
 
-        .main-layer { width: 100%; max-width: 450px; margin-top: 0; }
-        
+        .main-layer { width: 100%; max-width: 450px; margin: 0 auto; }
+        
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(12px);
@@ -110,7 +62,6 @@
             padding: 25px;
             box-shadow: var(--glass-shadow);
             text-align: center;
-            margin-top: 30px;
         }
 
         .upload-zone {
@@ -120,7 +71,6 @@
             background: rgba(255, 255, 255, 0.2);
             margin-bottom: 15px;
             transition: 0.3s;
-            position: relative;
         }
         .upload-zone:hover { background: rgba(255, 255, 255, 0.3); transform: scale(1.02); }
 
@@ -136,7 +86,6 @@
             border: 1px dashed #2c7a4d;
             line-height: 1.5;
             font-weight: 500;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
         }
         .upload-hint span {
             font-weight: 600;
@@ -159,6 +108,9 @@
             width: 100%;
             transition: 0.3s;
         }
+        .btn:hover {
+            background: var(--accent-hover);
+        }
 
         #progressSection, #resultSection { display: none; margin-top: 20px; }
         .progress-bar { background: rgba(0,0,0,0.1); height: 8px; border-radius: 4px; overflow: hidden; margin: 10px 0; }
@@ -171,26 +123,16 @@
         }
         .input-group input { flex: 1; background: transparent; border: none; padding: 6px; font-size: 12px; outline: none; }
         .btn-copy { background: var(--accent-color); color: white; border: none; padding: 0 12px; border-radius: 4px; font-size: 11px; cursor: pointer; }
+        .btn-copy:hover { background: var(--accent-hover); }
 
-        .music-player { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
-        .music-toggle {
-            width: 50px; height: 50px; border-radius: 50%; background: var(--glass-bg);
-            backdrop-filter: blur(12px); border: 1px solid var(--glass-border);
-            display: flex; align-items: center; justify-content: center; cursor: pointer;
-            box-shadow: var(--glass-shadow);
-        }
-        .music-toggle.playing { animation: rotate 3s linear infinite; }
-        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .music-toggle::after { content: "♫"; font-size: 24px; color: var(--accent-color); }
-        
-        #retryNotice { display: none; } 
+        #retryNotice { display: none; } 
     </style>
     <script>
         var _hmt = _hmt || [];
         (function() {
           var hm = document.createElement("script");
           hm.src = "https://hm.baidu.com/hm.js?f463aebe70bb41d3370a497b28a6d7ac";
-          var s = document.getElementsByTagName("script")[0]; 
+          var s = document.getElementsByTagName("script")[0]; 
           s.parentNode.insertBefore(hm, s);
         })();
     </script>
@@ -204,18 +146,8 @@
         <div class="background-overlay"></div>
     </div>
 
-    <div class="marquee-container">
-        <div class="marquee">
-            <a href="https://kelayun.notepin.co" target="_blank">✈️克拉云机场，月付2元1000G流量，超低延迟的家宽ip，不限速不限设备</a>
-        </div>
-    </div>
-
     <div class="main-layer">
-        <div class="page-title">裤佬永久直链托管</div>
-        
-        <div class="avatar-container">
-            <img class="avatar-img" src="https://mpimg.cn/view.php/f28da3eac8f392e9fa2ba91723b2bf4c.png" alt="裤佬头像" title="裤佬">
-        </div>
+        <div class="page-title">卡卡的西永久直链托管</div>
 
         <div class="glass-card">
             <div id="uploadForm">
@@ -231,7 +163,6 @@
             </div>
 
             <div id="progressSection">
-                <p style="font-size: 13px;">✈️TG频道https://t.me/stymei </p>
                 <div class="progress-bar"><div class="progress-fill" id="progressBar"></div></div>
                 <p id="percentText" style="font-size: 12px; color: var(--accent-color);">0%</p>
                 <p id="errorMessage" style="font-size: 12px; color: #d14545; display: none;"></p>
@@ -251,36 +182,16 @@
         </div>
     </div>
 
-    <div class="music-player">
-        <div class="music-toggle" id="musicToggle"></div>
-    </div>
-    <audio id="bgMusic" loop src="https://mpimg.cn/view.php/ac863e4b37bd7eb8388e97f15aed64dc.mp3"></audio>
-
     <script>
-        const bgMusic = document.getElementById('bgMusic');
-        const musicToggle = document.getElementById('musicToggle');
         const fileInput = document.getElementById('fileInput');
         const dropZone = document.getElementById('dropZone');
         const errorMessage = document.getElementById('errorMessage');
-
-        window.addEventListener('load', () => {
-            bgMusic.muted = true;
-            bgMusic.play().then(() => {
-                musicToggle.classList.add('playing');
-                document.body.addEventListener('click', () => { bgMusic.muted = false; }, { once: true });
-            }).catch(() => {});
-        });
-
-        musicToggle.onclick = () => {
-            if (bgMusic.paused) { bgMusic.play(); musicToggle.classList.add('playing'); }
-            else { bgMusic.pause(); musicToggle.classList.remove('playing'); }
-        };
 
         const API = 'https://file.panell.pp.ua/';
 
         dropZone.onclick = () => fileInput.click();
         fileInput.onchange = (e) => { if(e.target.files[0]) handleUpload(e.target.files[0]); };
-        
+        
         async function handleUpload(file) {
             document.getElementById('uploadForm').style.display = 'none';
             document.getElementById('progressSection').style.display = 'block';
@@ -304,13 +215,13 @@
                 try {
                     const responseText = xhr.responseText.trim();
                     console.log('Response:', responseText);
-                    
+                    
                     if (xhr.status === 200) {
                         const urlMatch = responseText.match(/https?:\/\/[^\s"']+/);
                         if (urlMatch) {
                             const raw = urlMatch[0];
                             document.getElementById('rawLink').value = raw;
-                            
+                            
                             document.getElementById('progressSection').style.display = 'none';
                             document.getElementById('resultSection').style.display = 'block';
                             return;
