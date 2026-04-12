@@ -12,452 +12,166 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
+        /* 日间主题（默认） */
         body {
-            min-height: 100vh;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        body.theme-day {
             background: radial-gradient(circle at 30% 20%, rgba(180, 220, 255, 0.9), rgba(255, 255, 255, 0.95));
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+        }
+        body.theme-night {
+            background: radial-gradient(circle at 30% 20%, #0a1a2a, #0f2a3a);
+        }
+
+        /* 日间卡片样式 */
+        body.theme-day .card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(35px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            color: #2c3e4e;
+        }
+        body.theme-night .card {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(35px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
+        }
+
+        /* 日间文字颜色 */
+        body.theme-day .gradient-name {
+            background: linear-gradient(135deg, #1e3c4c, #4a7c94, #2c5a6e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 12px rgba(70, 130, 200, 0.4);
+        }
+        body.theme-night .gradient-name {
+            background: linear-gradient(135deg, #b0d4ff, #7cb8f0, #4a90e2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 12px rgba(120, 180, 255, 0.6);
+        }
+
+        body.theme-day .subtitle,
+        body.theme-day .upload-title,
+        body.theme-day .upload-info,
+        body.theme-day .label,
+        body.theme-day .progress-text,
+        body.theme-day .btn,
+        body.theme-day .btn-copy {
+            color: #2c3e4e;
+        }
+        body.theme-night .subtitle,
+        body.theme-night .upload-title,
+        body.theme-night .upload-info,
+        body.theme-night .label,
+        body.theme-night .progress-text,
+        body.theme-night .btn,
+        body.theme-night .btn-copy {
+            color: #f0f0f0;
+        }
+
+        body.theme-day .upload-zone {
+            background: rgba(255, 255, 255, 0.5);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+        body.theme-night .upload-zone {
+            background: rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        body.theme-night .upload-zone:hover {
+            background: rgba(0, 0, 0, 0.6);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        body.theme-day .btn {
+            background: rgba(255, 255, 255, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            color: #2c3e4e;
+        }
+        body.theme-night .btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+        }
+        body.theme-night .btn-outline {
+            background: rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        body.theme-day .input-group {
+            background: rgba(255, 255, 255, 0.5);
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+        body.theme-night .input-group {
+            background: rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        body.theme-night .input-group input {
+            color: #ffffff;
+        }
+        body.theme-night .btn-copy {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+
+        /* 背景视频叠加层调整 */
+        .background-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+        .background-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: background 0.3s ease;
+            z-index: -1;
+        }
+        body.theme-day .background-overlay {
+            background: rgba(255, 255, 255, 0.7);
+        }
+        body.theme-night .background-overlay {
+            background: rgba(0, 0, 0, 0.6);
         }
 
         .container {
             width: 100%;
             max-width: 500px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
-        /* 标题区域 - 带光晕动画和 ✨ 装饰 */
+        /* 标题区域 */
         .title-section {
             text-align: center;
             margin-bottom: 8px;
         }
-
         .gradient-name {
-            background: linear-gradient(135deg, #1e3c4c, #4a7c94, #2c5a6e);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
             font-size: 36px;
             font-weight: 800;
             letter-spacing: -0.5px;
-            text-shadow: 0 0 12px rgba(70, 130, 200, 0.4);
             display: inline-block;
             animation: shimmer 4s ease infinite;
         }
-
         @keyframes shimmer {
             0% { text-shadow: 0 0 4px rgba(70, 130, 200, 0.2); filter: brightness(1); }
             50% { text-shadow: 0 0 16px rgba(70, 130, 200, 0.7); filter: brightness(1.05); }
             100% { text-shadow: 0 0 4px rgba(70, 130, 200, 0.2); filter: brightness(1); }
         }
-
         .title-decoration {
             font-size: 36px;
-            display: inline-block;
-            vertical-align: middle;
-            margin: 0 6px;
-        }
-
-        .subtitle {
-            text-align: center;
-            font-size: 15px;
-            color: #5d7a8c;
-            margin-top: 8px;
-            margin-bottom: 28px;
-            font-weight: 500;
-        }
-
-        /* 高透玻璃卡片 */
-        .card {
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(35px);
-            border-radius: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-            padding: 28px 22px;
-            margin-bottom: 20px;
-        }
-
-        /* 上传区域 */
-        .upload-zone {
-            background: rgba(255, 255, 255, 0.5);
-            border: 1.5px solid rgba(255, 255, 255, 0.8);
-            border-radius: 28px;
-            padding: 32px 16px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            margin-bottom: 20px;
-        }
-
-        .upload-zone:hover {
-            background: rgba(255, 255, 255, 0.7);
-            border-color: rgba(255, 255, 255, 0.95);
-        }
-
-        .upload-icon {
-            font-size: 48px;
-            margin-bottom: 12px;
-        }
-
-        .upload-title {
-            font-weight: 600;
-            font-size: 18px;
-            color: #2c3e4e;
-            margin-bottom: 6px;
-        }
-
-        .upload-info {
-            font-size: 13px;
-            color: #5d7a8c;
-            line-height: 1.4;
-        }
-
-        .btn {
-            background: rgba(255, 255, 255, 0.35);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            color: #2c3e4e;
-            font-weight: 600;
-            padding: 14px;
-            border-radius: 40px;
-            width: 100%;
-            font-size: 17px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .btn:active {
-            transform: scale(0.97);
-            background: rgba(255, 255, 255, 0.55);
-        }
-
-        .btn-outline {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            color: #2c3e4e;
-            margin-top: 16px;
-        }
-
-        #progressSection, #resultSection {
-            display: none;
-            margin-top: 24px;
-        }
-
-        .progress-bar {
-            background: rgba(0, 0, 0, 0.1);
-            height: 6px;
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 12px 0;
-        }
-
-        .progress-fill {
-            width: 0%;
-            height: 100%;
-            background: #3a6ea5;
-            border-radius: 10px;
-            transition: width 0.3s;
-        }
-
-        .progress-text {
-            font-size: 13px;
-            color: #2c3e4e;
-            text-align: center;
-            font-weight: 500;
-        }
-
-        .result-item {
-            margin-bottom: 22px;
-        }
-
-        .label {
-            font-size: 14px;
-            font-weight: 600;
-            color: #2c3e4e;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .input-group {
-            display: flex;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 28px;
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            overflow: hidden;
-            backdrop-filter: blur(4px);
-        }
-
-        .input-group input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            padding: 14px 18px;
-            font-size: 14px;
-            outline: none;
-            color: #1e2f3a;
-            font-weight: 500;
-        }
-
-        .btn-copy {
-            background: rgba(255, 255, 255, 0.4);
-            border: none;
-            padding: 0 22px;
-            color: #2c3e4e;
-            font-weight: 600;
-            font-size: 15px;
-            cursor: pointer;
-            backdrop-filter: blur(4px);
-            transition: 0.2s;
-        }
-
-        .btn-copy:active {
-            background: rgba(255, 255, 255, 0.7);
-        }
-
-        .error-message {
-            background: rgba(255, 235, 235, 0.9);
-            backdrop-filter: blur(10px);
-            color: #c0392b;
-            font-size: 13px;
-            padding: 12px;
-            border-radius: 24px;
-            margin-top: 16px;
-            display: none;
-            text-align: center;
-            font-weight: 500;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <div class="title-section">
-        <div>
-            <span class="title-decoration">✨</span>
-            <span class="gradient-name">卡卡的西</span>
-            <span class="title-decoration">✨</span>
-        </div>
-        <div class="subtitle">不限格式 · 永久储存 · 极速上传</div>
-    </div>
-
-    <div class="card">
-        <div id="uploadForm">
-            <div class="upload-zone" id="dropZone">
-                <div class="upload-icon">📂</div>
-                <div class="upload-title">点击或拖拽上传文件</div>
-                <div class="upload-info">支持任意格式，单个文件建议 ≤200MB</div>
-                <input type="file" id="fileInput" hidden>
-            </div>
-            <button class="btn" id="uploadBtn">选择文件上传</button>
-        </div>
-
-        <div id="progressSection">
-            <div class="progress-bar"><div class="progress-fill" id="progressBar"></div></div>
-            <div class="progress-text" id="percentText">准备上传...</div>
-            <div id="errorMsg" class="error-message"></div>
-        </div>
-
-        <div id="resultSection">
-            <div class="result-item">
-                <span class="label">🔗 永久直链地址</span>
-                <div class="input-group">
-                    <input type="text" id="rawLink" readonly placeholder="上传成功后将显示链接">
-                    <button class="btn-copy" onclick="copyValue('rawLink', this)">复制</button>
-                </div>
-            </div>
-            <button class="btn btn-outline" onclick="resetUpload()">重新上传</button>
-        </div>
-    </div>
-</div>
-
-<script>
-    // ---------- 配置 ----------
-    const API_URL = 'https://file.panell.pp.ua/';
-
-    // DOM 元素
-    const fileInput = document.getElementById('fileInput');
-    const dropZone = document.getElementById('dropZone');
-    const uploadBtn = document.getElementById('uploadBtn');
-    const uploadFormDiv = document.getElementById('uploadForm');
-    const progressSection = document.getElementById('progressSection');
-    const resultSection = document.getElementById('resultSection');
-    const progressBar = document.getElementById('progressBar');
-    const percentText = document.getElementById('percentText');
-    const errorMsgDiv = document.getElementById('errorMsg');
-    const rawLinkInput = document.getElementById('rawLink');
-
-    function resetUpload() {
-        uploadFormDiv.style.display = 'block';
-        progressSection.style.display = 'none';
-        resultSection.style.display = 'none';
-        fileInput.value = '';
-        errorMsgDiv.style.display = 'none';
-        errorMsgDiv.innerHTML = '';
-        progressBar.style.width = '0%';
-        percentText.innerText = '';
-    }
-
-    function showError(message) {
-        errorMsgDiv.innerHTML = '❌ ' + message;
-        errorMsgDiv.style.display = 'block';
-        setTimeout(() => {
-            if (errorMsgDiv.style.display === 'block') {
-                resetUpload();
-            }
-        }, 4000);
-    }
-
-    async function handleUpload(file) {
-        if (!file) return;
-        if (file.size > 200 * 1024 * 1024) {
-            alert('文件超过 200MB，可能上传失败，建议压缩后重试');
-        }
-
-        uploadFormDiv.style.display = 'none';
-        progressSection.style.display = 'block';
-        progressBar.style.width = '0%';
-        percentText.innerText = '准备上传...';
-        errorMsgDiv.style.display = 'none';
-
-        const fd = new FormData();
-        fd.append('file', file);
-
-        return new Promise((resolve, reject) => {
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', API_URL, true);
-            xhr.timeout = 120000;
-
-            let lastPercent = 0;
-            xhr.upload.onprogress = (e) => {
-                if (e.lengthComputable) {
-                    const percent = Math.round((e.loaded / e.total) * 100);
-                    if (percent !== lastPercent) {
-                        lastPercent = percent;
-                        progressBar.style.width = percent + '%';
-                        percentText.innerText = `上传进度: ${percent}% 🚀`;
-                        if (percent === 100) {
-                            percentText.innerText = '上传完成，等待服务器响应... ⏳';
-                        }
-                    }
-                }
-            };
-
-            xhr.onload = () => {
-                if (xhr.status === 200) {
-                    let responseText = xhr.responseText.trim();
-                    console.log('服务器响应:', responseText);
-                    let urlMatch = responseText.match(/https?:\/\/[^\s"']+/);
-                    if (urlMatch) {
-                        let rawUrl = urlMatch[0];
-                        rawLinkInput.value = rawUrl;
-                        progressSection.style.display = 'none';
-                        resultSection.style.display = 'block';
-                        resolve(rawUrl);
-                    } else if (responseText.startsWith('http')) {
-                        rawLinkInput.value = responseText;
-                        progressSection.style.display = 'none';
-                        resultSection.style.display = 'block';
-                        resolve(responseText);
-                    } else {
-                        showError('上传失败：服务器未返回有效链接');
-                        reject(new Error('无效响应'));
-                    }
-                } else {
-                    showError(`上传失败 (${xhr.status})，请稍后重试`);
-                    reject(new Error(`HTTP ${xhr.status}`));
-                }
-            };
-
-            xhr.ontimeout = () => {
-                showError('上传超时，请检查网络后重试');
-                reject(new Error('Timeout'));
-            };
-
-            xhr.onerror = () => {
-                showError('网络连接失败，请检查网络后重试');
-                reject(new Error('Network Error'));
-            };
-
-            xhr.send(fd);
-        }).catch(err => {
-            console.warn(err);
-        });
-    }
-
-    fileInput.onchange = (e) => {
-        if (e.target.files && e.target.files[0]) {
-            handleUpload(e.target.files[0]);
-        }
-    };
-    uploadBtn.onclick = () => fileInput.click();
-    dropZone.onclick = () => fileInput.click();
-
-    // 拖拽上传
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-        dropZone.addEventListener(eventName, preventDefaults, false);
-    });
-    function preventDefaults(e) {
-        e.preventDefault();
-        e.stopPropagation();
-    }
-    dropZone.addEventListener('dragenter', () => {
-        dropZone.style.background = 'rgba(255, 255, 255, 0.7)';
-        dropZone.style.borderColor = 'rgba(255, 255, 255, 0.95)';
-    });
-    dropZone.addEventListener('dragleave', () => {
-        dropZone.style.background = 'rgba(255, 255, 255, 0.5)';
-        dropZone.style.borderColor = 'rgba(255, 255, 255, 0.8)';
-    });
-    dropZone.addEventListener('drop', (e) => {
-        dropZone.style.background = 'rgba(255, 255, 255, 0.5)';
-        dropZone.style.borderColor = 'rgba(255, 255, 255, 0.8)';
-        const files = e.dataTransfer.files;
-        if (files && files.length > 0) {
-            fileInput.files = files;
-            handleUpload(files[0]);
-        }
-    });
-
-    function copyValue(id, btn) {
-        const input = document.getElementById(id);
-        if (!input || !input.value) {
-            alert('没有可复制的内容');
-            return;
-        }
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(input.value).then(() => {
-                const originalText = btn.innerText;
-                btn.innerText = '✓ 已复制';
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                }, 1500);
-            }).catch(() => fallbackCopy(input, btn));
-        } else {
-            fallbackCopy(input, btn);
-        }
-    }
-
-    function fallbackCopy(input, btn) {
-        input.select();
-        input.setSelectionRange(0, 99999);
-        try {
-            document.execCommand('copy');
-            const originalText = btn.innerText;
-            btn.innerText = '✓ 已复制';
-            setTimeout(() => {
-                btn.innerText = originalText;
-            }, 1500);
-        } catch (err) {
-            alert('复制失败，请手动复制');
-        }
-    }
-
-    window.resetUpload = resetUpload;
-</script>
-</body>
-</html>
+            display:
