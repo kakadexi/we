@@ -21,7 +21,7 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        /* 水光琉璃背景：浅蓝到白色的径向渐变 */
+        /* 水光琉璃背景 */
         body {
             min-height: 100vh;
             background: radial-gradient(circle at 30% 20%, rgba(180, 220, 255, 0.9), rgba(255, 255, 255, 0.95));
@@ -37,26 +37,51 @@
             margin: 0 auto;
         }
 
-        /* 标题：深蓝灰色，带轻微光泽 */
-        .page-title {
-            font-size: 32px;
-            font-weight: 700;
+        /* 标题区域 */
+        .title-section {
             text-align: center;
             margin-bottom: 8px;
-            color: #2c3e4e;
-            letter-spacing: -0.3px;
-            text-shadow: 0 1px 1px rgba(255,255,255,0.5);
+        }
+
+        /* 渐变文字 + 光晕 */
+        .gradient-name {
+            background: linear-gradient(135deg, #1e3c4c, #4a7c94, #2c5a6e);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 12px rgba(70, 130, 200, 0.4);
+            display: inline-block;
+            animation: shimmer 4s ease infinite;
+        }
+
+        /* 微光动画 */
+        @keyframes shimmer {
+            0% { text-shadow: 0 0 4px rgba(70, 130, 200, 0.2); filter: brightness(1); }
+            50% { text-shadow: 0 0 16px rgba(70, 130, 200, 0.7); filter: brightness(1.05); }
+            100% { text-shadow: 0 0 4px rgba(70, 130, 200, 0.2); filter: brightness(1); }
+        }
+
+        .title-decoration {
+            font-size: 36px;
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 6px;
         }
 
         .subtitle {
             text-align: center;
             font-size: 15px;
             color: #5d7a8c;
-            margin-bottom: 32px;
+            margin-top: 8px;
+            margin-bottom: 28px;
             font-weight: 500;
         }
 
-        /* 玻璃卡片：高透反射，内高光，外阴影 */
+        /* 玻璃卡片 */
         .card {
             background: rgba(255, 255, 255, 0.4);
             backdrop-filter: blur(35px);
@@ -68,7 +93,7 @@
             margin-bottom: 20px;
         }
 
-        /* 上传区域：半透白，高光边框 */
+        /* 上传区域 */
         .upload-zone {
             background: rgba(255, 255, 255, 0.5);
             border: 1.5px solid rgba(255, 255, 255, 0.8);
@@ -78,7 +103,6 @@
             cursor: pointer;
             transition: all 0.25s ease;
             margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
 
         .upload-zone:hover {
@@ -89,7 +113,6 @@
         .upload-icon {
             font-size: 48px;
             margin-bottom: 12px;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));
         }
 
         .upload-title {
@@ -105,7 +128,6 @@
             line-height: 1.4;
         }
 
-        /* 按钮：透明玻璃，亮白边框 */
         .btn {
             background: rgba(255, 255, 255, 0.35);
             backdrop-filter: blur(10px);
@@ -118,7 +140,6 @@
             font-size: 17px;
             cursor: pointer;
             transition: 0.2s;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
         }
 
         .btn:active {
@@ -199,10 +220,6 @@
             font-weight: 500;
         }
 
-        .input-group input::placeholder {
-            color: rgba(44, 62, 78, 0.5);
-        }
-
         .btn-copy {
             background: rgba(255, 255, 255, 0.4);
             border: none;
@@ -236,8 +253,14 @@
 <body>
 
 <div class="container">
-    <div class="page-title">卡卡的西 · 直链托管</div>
-    <div class="subtitle">不限格式 · 200MB · 永久储存</div>
+    <div class="title-section">
+        <div>
+            <span class="title-decoration">✨</span>
+            <span class="gradient-name">卡卡的西</span>
+            <span class="title-decoration">✨</span>
+        </div>
+        <div class="subtitle">不限格式 · 200MB内 · 永久储存</div>
+    </div>
 
     <div class="card">
         <div id="uploadForm">
@@ -278,13 +301,12 @@
 
 <script>
     // ---------- 配置 ----------
-    const PROXY_GATEWAY = 'http://3.0o0o0.de5.net/https://';  // 镜像代理（路径式）
+    const PROXY_GATEWAY = 'http://3.0o0o0.de5.net/https://';
     const API_URL = 'https://catbox.moe/user/api.php';
-    const CF_PROXY = 'https://proxy.jsnzkpg.uk/?url=';      // 上传用的 CORS 代理
+    const CF_PROXY = 'https://proxy.jsnzkpg.uk/?url=';
 
     function buildMirrorWithProxy(originalUrl) {
         if (!originalUrl) return '';
-        // 保留协议，直接拼接（因为 PROXY_GATEWAY 已包含 https://）
         return PROXY_GATEWAY + originalUrl.replace(/^https?:\/\//, '');
     }
 
@@ -395,14 +417,12 @@
         });
     }
 
-    // 触发上传
     fileInput.onchange = (e) => {
         if (e.target.files && e.target.files[0]) {
             handleUpload(e.target.files[0]);
         }
     };
 
-    // 拖拽上传
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
         dropZone.addEventListener(eventName, preventDefaults, false);
     });
