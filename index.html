@@ -12,9 +12,14 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        /* 日间主题（默认） */
+        /* 日间主题背景（默认） */
         body {
             transition: background 0.3s ease, color 0.3s ease;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
         body.theme-day {
             background: radial-gradient(circle at 30% 20%, rgba(180, 220, 255, 0.9), rgba(255, 255, 255, 0.95));
@@ -116,35 +121,13 @@
             background: rgba(255, 255, 255, 0.2);
             color: #ffffff;
         }
-
-        /* 背景视频叠加层调整 */
-        .background-layer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
+        body.theme-day .error-message {
+            background: rgba(255, 235, 235, 0.9);
+            color: #c0392b;
         }
-        .background-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .background-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            transition: background 0.3s ease;
-            z-index: -1;
-        }
-        body.theme-day .background-overlay {
-            background: rgba(255, 255, 255, 0.7);
-        }
-        body.theme-night .background-overlay {
-            background: rgba(0, 0, 0, 0.6);
+        body.theme-night .error-message {
+            background: rgba(200, 80, 80, 0.7);
+            color: #ffbaba;
         }
 
         .container {
@@ -300,14 +283,6 @@
             text-align: center;
             font-weight: 500;
         }
-        body.theme-day .error-message {
-            background: rgba(255, 235, 235, 0.9);
-            color: #c0392b;
-        }
-        body.theme-night .error-message {
-            background: rgba(200, 80, 80, 0.7);
-            color: #ffbaba;
-        }
 
         /* 主题切换按钮 */
         .theme-toggle {
@@ -343,13 +318,6 @@
     </style>
 </head>
 <body class="theme-day">
-    <div class="background-layer">
-        <video class="background-video" autoplay muted loop playsinline>
-            <source src="https://txmov2.a.kwimgs.com/upic/2023/10/13/16/BMjAyMzEwMTMxNjU4MTJfMTcyNTc4NzU4N18xMTQ4OTQ2OTgxMzRfMl8z_b_B209e890a596d64fbd174507b758b0815.mp4" type="video/mp4">
-        </video>
-        <div class="background-overlay"></div>
-    </div>
-
     <div class="theme-toggle" id="themeToggle">
         <span id="themeIcon">🌞</span> <span id="themeLabel">日间</span>
     </div>
