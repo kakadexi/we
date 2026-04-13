@@ -2,591 +2,226 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>卡卡的西 · 水光琉璃托管</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>裤佬永久直链托管</title>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?f463aebe70bb41d3370a497b28a6d7ac";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --accent-color: #e80860;
         }
 
-        /* 日间主题背景（默认） */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, sans-serif; }
+
         body {
-            transition: background 0.3s ease, color 0.3s ease;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        body.theme-day {
-            background: radial-gradient(circle at 30% 20%, rgba(180, 220, 255, 0.9), rgba(255, 255, 255, 0.95));
-        }
-        body.theme-night {
-            background: radial-gradient(circle at 30% 20%, #0a1a2a, #0f2a3a);
+            display: flex; justify-content: center; align-items: flex-start;
+            color: #333; overflow-x: hidden;
+            padding: 15px; padding-top: 6vh;
         }
 
-        /* 日间卡片样式 */
-        body.theme-day .card {
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(35px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-            color: #2c3e4e;
-        }
-        body.theme-night .card {
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(35px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            color: #e0e0e0;
+        .background-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; }
+        .background-video { width: 100%; height: 100%; object-fit: cover; }
+        .background-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.5); z-index: -1;
         }
 
-        /* 日间文字颜色 */
-        body.theme-day .gradient-name {
-            background: linear-gradient(135deg, #1e3c4c, #4a7c94, #2c5a6e);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 12px rgba(70, 130, 200, 0.4);
+        .main-layer { width: 100%; max-width: 450px; position: relative; }
+        .page-title {
+            text-align: center; font-size: 30px; font-weight: 800; margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff6b6b, #e80860, #45b7d1, #feca57);
+            background-size: 400%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: gradient 8s ease infinite;
         }
-        body.theme-night .gradient-name {
-            background: linear-gradient(135deg, #b0d4ff, #7cb8f0, #4a90e2);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 12px rgba(120, 180, 255, 0.6);
+        @keyframes gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+        .avatar-img {
+            width: 85px; height: 85px; border-radius: 50%; object-fit: cover;
+            display: block; margin: 0 auto; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        body.theme-day .subtitle,
-        body.theme-day .upload-title,
-        body.theme-day .upload-info,
-        body.theme-day .label,
-        body.theme-day .progress-text,
-        body.theme-day .btn,
-        body.theme-day .btn-copy {
-            color: #2c3e4e;
-        }
-        body.theme-night .subtitle,
-        body.theme-night .upload-title,
-        body.theme-night .upload-info,
-        body.theme-night .label,
-        body.theme-night .progress-text,
-        body.theme-night .btn,
-        body.theme-night .btn-copy {
-            color: #f0f0f0;
+        .glass-card {
+            background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-radius: 16px; border: 1px solid var(--glass-border); padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); text-align: center; margin-top: 20px;
         }
 
-        body.theme-day .upload-zone {
-            background: rgba(255, 255, 255, 0.5);
-            border-color: rgba(255, 255, 255, 0.8);
-        }
-        body.theme-night .upload-zone {
-            background: rgba(0, 0, 0, 0.4);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-        body.theme-night .upload-zone:hover {
-            background: rgba(0, 0, 0, 0.6);
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-
-        body.theme-day .btn {
-            background: rgba(255, 255, 255, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            color: #2c3e4e;
-        }
-        body.theme-night .btn {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: #ffffff;
-        }
-        body.theme-night .btn-outline {
-            background: rgba(0, 0, 0, 0.3);
-            border-color: rgba(255, 255, 255, 0.4);
-        }
-        body.theme-day .input-group {
-            background: rgba(255, 255, 255, 0.5);
-            border-color: rgba(255, 255, 255, 0.7);
-        }
-        body.theme-night .input-group {
-            background: rgba(0, 0, 0, 0.5);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-        body.theme-night .input-group input {
-            color: #ffffff;
-        }
-        body.theme-night .btn-copy {
-            background: rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-        }
-        body.theme-day .error-message {
-            background: rgba(255, 235, 235, 0.9);
-            color: #c0392b;
-        }
-        body.theme-night .error-message {
-            background: rgba(200, 80, 80, 0.7);
-            color: #ffbaba;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* 标题区域 */
-        .title-section {
-            text-align: center;
-            margin-bottom: 8px;
-        }
-        .gradient-name {
-            font-size: 36px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            display: inline-block;
-            animation: shimmer 4s ease infinite;
-        }
-        @keyframes shimmer {
-            0% { text-shadow: 0 0 4px rgba(70, 130, 200, 0.2); filter: brightness(1); }
-            50% { text-shadow: 0 0 16px rgba(70, 130, 200, 0.7); filter: brightness(1.05); }
-            100% { text-shadow: 0 0 4px rgba(70, 130, 200, 0.2); filter: brightness(1); }
-        }
-        .title-decoration {
-            font-size: 36px;
-            display: inline-block;
-            vertical-align: middle;
-            margin: 0 6px;
-        }
-        .subtitle {
-            text-align: center;
-            font-size: 15px;
-            margin-top: 8px;
-            margin-bottom: 28px;
-            font-weight: 500;
-        }
-
-        /* 卡片通用样式 */
-        .card {
-            border-radius: 32px;
-            padding: 28px 22px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
         .upload-zone {
-            border-radius: 28px;
-            padding: 32px 16px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            margin-bottom: 20px;
-        }
-        .upload-icon {
-            font-size: 48px;
-            margin-bottom: 12px;
-        }
-        .upload-title {
-            font-weight: 600;
-            font-size: 18px;
-            margin-bottom: 6px;
-        }
-        .upload-info {
-            font-size: 13px;
-            line-height: 1.4;
-        }
-        .btn {
-            font-weight: 600;
-            padding: 14px;
-            border-radius: 40px;
-            width: 100%;
-            font-size: 17px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .btn:active {
-            transform: scale(0.97);
-        }
-        .btn-outline {
-            margin-top: 16px;
-        }
-        #progressSection, #resultSection {
-            display: none;
-            margin-top: 24px;
-        }
-        .progress-bar {
-            background: rgba(0, 0, 0, 0.1);
-            height: 6px;
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 12px 0;
-        }
-        .progress-fill {
-            width: 0%;
-            height: 100%;
-            background: #3a6ea5;
-            border-radius: 10px;
-            transition: width 0.3s;
-        }
-        .progress-text {
-            font-size: 13px;
-            text-align: center;
-            font-weight: 500;
-        }
-        .result-item {
-            margin-bottom: 22px;
-        }
-        .label {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .input-group {
-            display: flex;
-            border-radius: 28px;
-            overflow: hidden;
-            backdrop-filter: blur(4px);
-        }
-        .input-group input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            padding: 14px 18px;
-            font-size: 14px;
-            outline: none;
-            font-weight: 500;
-        }
-        .btn-copy {
-            border: none;
-            padding: 0 22px;
-            font-weight: 600;
-            font-size: 15px;
-            cursor: pointer;
-            backdrop-filter: blur(4px);
-            transition: 0.2s;
-        }
-        .btn-copy:active {
-            opacity: 0.7;
-        }
-        .error-message {
-            backdrop-filter: blur(10px);
-            font-size: 13px;
-            padding: 12px;
-            border-radius: 24px;
-            margin-top: 16px;
-            display: none;
-            text-align: center;
-            font-weight: 500;
+            border-radius: 12px; padding: 20px 10px; cursor: pointer;
+            background: rgba(255, 255, 255, 0.2); margin-bottom: 15px; transition: 0.3s;
+            border: 2px dashed var(--glass-border);
         }
 
-        /* 主题切换按钮 */
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 40px;
-            padding: 8px 16px;
-            font-size: 18px;
-            cursor: pointer;
-            z-index: 1000;
-            transition: 0.2s;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .format-list {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; margin: 12px 0;
+            max-height: 120px; overflow: hidden; /* 增加高度让更多标签露出来 */
         }
-        body.theme-day .theme-toggle {
-            background: rgba(255, 255, 255, 0.5);
-            color: #2c3e4e;
+        .tag {
+            font-size: 9px; background: rgba(255,255,255,0.4); color: #e80860;
+            padding: 2px 5px; border-radius: 3px; font-weight: bold; border: 0.5px solid rgba(232, 8, 96, 0.2);
         }
-        body.theme-night .theme-toggle {
-            background: rgba(0, 0, 0, 0.5);
-            color: #f0f0f0;
-            border-color: rgba(255, 255, 255, 0.3);
+
+        .upload-info-text { font-size: 13px; font-weight: 600; color: #444; margin-bottom: 8px; }
+
+        .btn {
+            background: var(--accent-color); color: white; border: none; padding: 12px;
+            border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; transition: 0.3s;
         }
-        .theme-toggle:active {
-            transform: scale(0.95);
+
+        #progressSection, #resultSection { display: none; margin-top: 15px; }
+        .progress-bar { background: rgba(0,0,0,0.1); height: 8px; border-radius: 4px; overflow: hidden; margin: 10px 0; }
+        .progress-fill { width: 0%; height: 100%; background: var(--accent-color); transition: 0.2s; }
+
+        .input-group {
+            display: flex; background: rgba(255,255,255,0.5); border: 1px solid var(--glass-border); 
+            border-radius: 8px; padding: 5px; margin-top: 10px;
         }
+        .input-group input { flex: 1; background: transparent; border: none; padding: 8px; font-size: 13px; outline: none; }
+        .btn-copy { background: var(--accent-color); color: white; border: none; padding: 0 15px; border-radius: 6px; cursor: pointer; }
+
+        .music-player { position: fixed; bottom: 30px; right: 25px; z-index: 999; }
+        .music-btn {
+            width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px); border: 1px solid var(--glass-border);
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); font-size: 20px;
+        }
+        .music-btn.playing { animation: spin 4s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     </style>
 </head>
-<body class="theme-day">
-    <div class="theme-toggle" id="themeToggle">
-        <span id="themeIcon">🌞</span> <span id="themeLabel">日间</span>
+<body onclick="handleFirstClick()">
+
+    <div class="background-layer">
+        <video class="background-video" autoplay muted loop playsinline>
+            <source src="https://txmov2.a.kwimgs.com/upic/2023/10/13/16/BMjAyMzEwMTMxNjU4MTJfMTcyNTc4NzU4N18xMTQ4OTQ2OTgxMzRfMl8z_b_B209e890a596d64fbd174507b758b0815.mp4" type="video/mp4">
+        </video>
+        <div class="background-overlay"></div>
     </div>
 
-    <div class="container">
-        <div class="title-section">
-            <div>
-                <span class="title-decoration">✨</span>
-                <span class="gradient-name">卡卡的西</span>
-                <span class="title-decoration">✨</span>
-            </div>
-            <div class="subtitle">不限格式 · 永久储存 · 极速上传</div>
-        </div>
+    <div class="main-layer">
+        <div class="page-title">裤佬永久直链托管</div>
+        <img class="avatar-img" src="https://mpimg.cn/view.php/f28da3eac8f392e9fa2ba91723b2bf4c.png">
 
-        <div class="card">
+        <div class="glass-card">
             <div id="uploadForm">
-                <div class="upload-zone" id="dropZone">
-                    <div class="upload-icon">📂</div>
-                    <div class="upload-title">点击或拖拽上传文件</div>
-                    <div class="upload-info">支持任意格式，单个文件建议 ≤200MB</div>
+                <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+                    <div class="upload-info-text">点击或拖拽上传任何文件</div>
+                    <div class="format-list">
+                        <span class="tag">MP4</span><span class="tag">M3U8</span><span class="tag">MKV</span><span class="tag">MOV</span><span class="tag">AVI</span><span class="tag">FLV</span><span class="tag">WMV</span>
+                        <span class="tag">MP3</span><span class="tag">WAV</span><span class="tag">FLAC</span><span class="tag">OGG</span><span class="tag">M4A</span><span class="tag">AAC</span><span class="tag">APE</span>
+                        <span class="tag">JPG</span><span class="tag">PNG</span><span class="tag">GIF</span><span class="tag">WEBP</span><span class="tag">BMP</span><span class="tag">SVG</span><span class="tag">ICO</span>
+                        <span class="tag">ZIP</span><span class="tag">7Z</span><span class="tag">RAR</span><span class="tag">TAR</span><span class="tag">GZ</span><span class="tag">ISO</span><span class="tag">DMG</span>
+                        <span class="tag">APK</span><span class="tag">IPA</span><span class="tag">EXE</span><span class="tag">PDF</span><span class="tag">TXT</span><span class="tag">JSON</span><span class="tag">XML</span><span class="tag">DOCX</span>
+                    </div>
+                    <p style="font-size: 11px; color: #666;">☁️ 永久储存 · 📦 256MB内 · ⚡ 智能直链</p>
                     <input type="file" id="fileInput" hidden>
                 </div>
-                <button class="btn" id="uploadBtn">选择文件上传</button>
+                <button class="btn" onclick="document.getElementById('fileInput').click()">立即上传文件</button>
             </div>
 
             <div id="progressSection">
+                <p style="font-size: 14px; font-weight: bold;">🚀 正在同步至云端...</p>
                 <div class="progress-bar"><div class="progress-fill" id="progressBar"></div></div>
-                <div class="progress-text" id="percentText">准备上传...</div>
-                <div id="errorMsg" class="error-message"></div>
+                <p id="percentText" style="font-size: 12px; color: #e80860;">准备中...</p>
             </div>
 
             <div id="resultSection">
-                <div class="result-item">
-                    <span class="label">🔗 永久直链地址</span>
+                <div style="text-align: left;">
+                    <span style="font-size: 12px; font-weight: bold; color: #666;">✅ 复制链接导入软件会自动识别：比如m3u,txt</span>
                     <div class="input-group">
-                        <input type="text" id="rawLink" readonly placeholder="上传成功后将显示链接">
+                        <input type="text" id="rawLink" readonly>
                         <button class="btn-copy" onclick="copyValue('rawLink', this)">复制</button>
                     </div>
                 </div>
-                <button class="btn btn-outline" onclick="resetUpload()">重新上传</button>
+                <p style="font-size: 11px; color: #999; margin-top: 15px;">关注TG频道：https://t.me/stymei</p>
+                <button class="btn" style="background:none; border:1px solid #e80860; color:#e80860; margin-top: 15px;" onclick="location.reload()">继续上传</button>
             </div>
         </div>
     </div>
 
+    <div class="music-player">
+        <div class="music-btn" id="musicBtn">🎵</div>
+    </div>
+    <audio id="bgMusic" loop src="https://mpimg.cn/view.php/ac863e4b37bd7eb8388e97f15aed64dc.mp3"></audio>
+
     <script>
-        // ---------- 主题切换逻辑 ----------
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const themeLabel = document.getElementById('themeLabel');
+        const bgMusic = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+        let hasInteracted = false;
 
-        // 判断当前时间是否为白天（日出6:00 - 日落18:00）
-        function isDayTime() {
-            const hours = new Date().getHours();
-            return hours >= 6 && hours < 18;
+        function handleFirstClick() {
+            if (!hasInteracted) {
+                bgMusic.play().then(() => {
+                    musicBtn.classList.add('playing');
+                    hasInteracted = true;
+                }).catch(e => console.log("播放被拦截"));
+            }
         }
 
-        // 应用主题
-        function setTheme(theme) {
-            document.body.classList.remove('theme-day', 'theme-night');
-            document.body.classList.add(theme);
-            if (theme === 'theme-day') {
-                themeIcon.textContent = '🌞';
-                themeLabel.textContent = '日间';
+        musicBtn.onclick = (e) => {
+            e.stopPropagation();
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicBtn.classList.add('playing');
             } else {
-                themeIcon.textContent = '🌙';
-                themeLabel.textContent = '夜间';
-            }
-            localStorage.setItem('preferredTheme', theme);
-        }
-
-        // 初始化主题：优先使用保存的偏好，否则根据时间自动判断
-        function initTheme() {
-            const saved = localStorage.getItem('preferredTheme');
-            if (saved && (saved === 'theme-day' || saved === 'theme-night')) {
-                setTheme(saved);
-            } else {
-                setTheme(isDayTime() ? 'theme-day' : 'theme-night');
-            }
-        }
-
-        // 手动切换
-        function toggleTheme() {
-            const isDay = document.body.classList.contains('theme-day');
-            setTheme(isDay ? 'theme-night' : 'theme-day');
-        }
-
-        themeToggle.addEventListener('click', toggleTheme);
-        initTheme();
-
-        // ---------- 上传功能 ----------
-        const API_URL = 'https://file.panell.pp.ua/';
-        const fileInput = document.getElementById('fileInput');
-        const dropZone = document.getElementById('dropZone');
-        const uploadBtn = document.getElementById('uploadBtn');
-        const uploadFormDiv = document.getElementById('uploadForm');
-        const progressSection = document.getElementById('progressSection');
-        const resultSection = document.getElementById('resultSection');
-        const progressBar = document.getElementById('progressBar');
-        const percentText = document.getElementById('percentText');
-        const errorMsgDiv = document.getElementById('errorMsg');
-        const rawLinkInput = document.getElementById('rawLink');
-
-        function resetUpload() {
-            uploadFormDiv.style.display = 'block';
-            progressSection.style.display = 'none';
-            resultSection.style.display = 'none';
-            fileInput.value = '';
-            errorMsgDiv.style.display = 'none';
-            errorMsgDiv.innerHTML = '';
-            progressBar.style.width = '0%';
-            percentText.innerText = '';
-        }
-
-        function showError(message) {
-            errorMsgDiv.innerHTML = '❌ ' + message;
-            errorMsgDiv.style.display = 'block';
-            setTimeout(() => {
-                if (errorMsgDiv.style.display === 'block') {
-                    resetUpload();
-                }
-            }, 4000);
-        }
-
-        async function handleUpload(file) {
-            if (!file) return;
-            if (file.size > 200 * 1024 * 1024) {
-                alert('文件超过 200MB，可能上传失败，建议压缩后重试');
-            }
-
-            uploadFormDiv.style.display = 'none';
-            progressSection.style.display = 'block';
-            progressBar.style.width = '0%';
-            percentText.innerText = '准备上传...';
-            errorMsgDiv.style.display = 'none';
-
-            const fd = new FormData();
-            fd.append('file', file);
-
-            return new Promise((resolve, reject) => {
-                const xhr = new XMLHttpRequest();
-                xhr.open('POST', API_URL, true);
-                xhr.timeout = 120000;
-
-                let lastPercent = 0;
-                xhr.upload.onprogress = (e) => {
-                    if (e.lengthComputable) {
-                        const percent = Math.round((e.loaded / e.total) * 100);
-                        if (percent !== lastPercent) {
-                            lastPercent = percent;
-                            progressBar.style.width = percent + '%';
-                            percentText.innerText = `上传进度: ${percent}% 🚀`;
-                            if (percent === 100) {
-                                percentText.innerText = '上传完成，等待服务器响应... ⏳';
-                            }
-                        }
-                    }
-                };
-
-                xhr.onload = () => {
-                    if (xhr.status === 200) {
-                        let responseText = xhr.responseText.trim();
-                        console.log('服务器响应:', responseText);
-                        let urlMatch = responseText.match(/https?:\/\/[^\s"']+/);
-                        if (urlMatch) {
-                            let rawUrl = urlMatch[0];
-                            rawLinkInput.value = rawUrl;
-                            progressSection.style.display = 'none';
-                            resultSection.style.display = 'block';
-                            resolve(rawUrl);
-                        } else if (responseText.startsWith('http')) {
-                            rawLinkInput.value = responseText;
-                            progressSection.style.display = 'none';
-                            resultSection.style.display = 'block';
-                            resolve(responseText);
-                        } else {
-                            showError('上传失败：服务器未返回有效链接');
-                            reject(new Error('无效响应'));
-                        }
-                    } else {
-                        showError(`上传失败 (${xhr.status})，请稍后重试`);
-                        reject(new Error(`HTTP ${xhr.status}`));
-                    }
-                };
-
-                xhr.ontimeout = () => {
-                    showError('上传超时，请检查网络后重试');
-                    reject(new Error('Timeout'));
-                };
-
-                xhr.onerror = () => {
-                    showError('网络连接失败，请检查网络后重试');
-                    reject(new Error('Network Error'));
-                };
-
-                xhr.send(fd);
-            }).catch(err => {
-                console.warn(err);
-            });
-        }
-
-        fileInput.onchange = (e) => {
-            if (e.target.files && e.target.files[0]) {
-                handleUpload(e.target.files[0]);
+                bgMusic.pause();
+                musicBtn.classList.remove('playing');
             }
         };
-        uploadBtn.onclick = () => fileInput.click();
-        dropZone.onclick = () => fileInput.click();
 
-        // 拖拽上传
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            dropZone.addEventListener(eventName, preventDefaults, false);
-        });
-        function preventDefaults(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-        dropZone.addEventListener('dragenter', () => {
-            dropZone.style.background = 'rgba(255, 255, 255, 0.7)';
-            dropZone.style.borderColor = 'rgba(255, 255, 255, 0.95)';
-        });
-        dropZone.addEventListener('dragleave', () => {
-            dropZone.style.background = 'rgba(255, 255, 255, 0.5)';
-            dropZone.style.borderColor = 'rgba(255, 255, 255, 0.8)';
-        });
-        dropZone.addEventListener('drop', (e) => {
-            dropZone.style.background = 'rgba(255, 255, 255, 0.5)';
-            dropZone.style.borderColor = 'rgba(255, 255, 255, 0.8)';
-            const files = e.dataTransfer.files;
-            if (files && files.length > 0) {
-                fileInput.files = files;
-                handleUpload(files[0]);
-            }
-        });
+        const fileInput = document.getElementById('fileInput');
+        const WORKER_URL = 'https://cloud.jsnzkpg.ccwu.cc/upload';
+
+        fileInput.onchange = async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            document.getElementById('uploadForm').style.display = 'none';
+            document.getElementById('progressSection').style.display = 'block';
+
+            const fd = new FormData();
+            fd.append('files[]', file);
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', WORKER_URL, true);
+
+            xhr.upload.onprogress = (ev) => {
+                const percent = Math.round((ev.loaded / ev.total) * 100);
+                document.getElementById('progressBar').style.width = percent + '%';
+                document.getElementById('percentText').innerText = `上传进度：${percent}%`;
+            };
+
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    document.getElementById('rawLink').value = xhr.responseText.trim();
+                    document.getElementById('progressSection').style.display = 'none';
+                    document.getElementById('resultSection').style.display = 'block';
+                } else {
+                    alert('上传失败');
+                    location.reload();
+                }
+            };
+            xhr.send(fd);
+        };
 
         function copyValue(id, btn) {
             const input = document.getElementById(id);
-            if (!input || !input.value) {
-                alert('没有可复制的内容');
-                return;
-            }
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(input.value).then(() => {
-                    const originalText = btn.innerText;
-                    btn.innerText = '✓ 已复制';
-                    setTimeout(() => {
-                        btn.innerText = originalText;
-                    }, 1500);
-                }).catch(() => fallbackCopy(input, btn));
-            } else {
-                fallbackCopy(input, btn);
-            }
+            navigator.clipboard.writeText(input.value).then(() => {
+                btn.innerText = '已复制';
+                setTimeout(() => btn.innerText = '复制', 1500);
+            });
         }
-
-        function fallbackCopy(input, btn) {
-            input.select();
-            input.setSelectionRange(0, 99999);
-            try {
-                document.execCommand('copy');
-                const originalText = btn.innerText;
-                btn.innerText = '✓ 已复制';
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                }, 1500);
-            } catch (err) {
-                alert('复制失败，请手动复制');
-            }
-        }
-
-        window.resetUpload = resetUpload;
     </script>
 </body>
 </html>
